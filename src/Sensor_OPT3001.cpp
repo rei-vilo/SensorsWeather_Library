@@ -88,9 +88,9 @@ void Sensor_OPT3001::get()
 
     // Extract _fraction and _exponent from _rawLux data
     uint32_t _fraction = _rawLux & 0x0fff;
-    uint32_t _exponent = 1 << ((_rawLux >> 12) & 0x000f); // to be /64 = >>6
+    uint32_t _exponent = 1 << ((_rawLux >> 12) & 0x000f);
 
-    _rawLux = (_fraction * _exponent) >> 6;
+    _rawLux = (_fraction * _exponent);
 }
 
 //uint32_t Sensor_OPT3001::light()
@@ -98,7 +98,7 @@ float Sensor_OPT3001::light()
 {
 
     // Scale to lux
-    return 0, 0625 * (float)_rawLux;
+    return 0.01 * (float)_rawLux;
 }
 
 void Sensor_OPT3001::setPowerMode(uint8_t mode)
