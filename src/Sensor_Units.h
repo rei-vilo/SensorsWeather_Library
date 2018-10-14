@@ -9,10 +9,10 @@
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 ///
-/// @date		Aug 20, 2015 19:03
+/// @date		20 Aug 2017
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2016
+/// @copyright	(c) Rei Vilo, 2015-2018
 /// @copyright	CC = SA BY NC
 ///
 /// @see		ReadMe.txt for references
@@ -107,7 +107,7 @@ const altitude_unit_t    FOOT        = { 0.3048, 0, "ft"};     ///< ft foot
 /// @brief	Light units
 /// @{
 typedef unit_conversion_s light_unit_t;
-const light_unit_t       LUX         = { 1, 0, "lux"};          ///< lux, SI reference
+const light_unit_t       LUX         = { 1, 0, "lx"};           ///< lx, SI reference
 /// @}
 
 ///

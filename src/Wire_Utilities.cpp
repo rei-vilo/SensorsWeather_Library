@@ -7,10 +7,10 @@
 //
 // Project 		SensorsBoosterPack
 //
-// Created by 	Rei Vilo, 20/08/2015 18:02
+// Created by 	Rei Vilo, 20 Aug 2015
 // 				http://embeddedcomputing.weebly.com
 //
-// Copyright	(c) Rei Vilo, 2015-2016
+// Copyright	(c) Rei Vilo, 2015-2018
 // Licence		CC = BY SA NC
 //
 // See 			Wire_Utilities.h for references
@@ -86,3 +86,8 @@ uint16_t readRegister16(uint8_t device, uint8_t command, uint8_t mode)
     return value;
 }
 
+void delayBusy(uint32_t ms)
+{
+    uint32_t chrono = millis() + ms;
+    while (millis() < chrono);
+}

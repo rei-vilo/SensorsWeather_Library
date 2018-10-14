@@ -1,7 +1,7 @@
 ///
-/// @file		Sensor_BME280.h
-/// @brief		Library header for BME280 sensor
-/// @details	BME280 Combined humidity and pressure sensor
+/// @file		Sensor_BMP280.h
+/// @brief		Library header for BMP280 sensor
+/// @details	BMP280 Combined humidity and pressure sensor
 /// @n
 /// @n @b		Project SensorsBoosterPack
 /// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
@@ -9,7 +9,7 @@
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 ///
-/// @date		20 Aug 2017
+/// @date		20 Aug 2015
 /// @version	102
 ///
 /// @copyright	(c) Rei Vilo, 2015-2018
@@ -53,46 +53,44 @@
 #   error Platform not defined
 #endif // end IDE
 
-#ifndef Sensor_BME280_RELEASE
+#ifndef Sensor_BMP280_RELEASE
 ///
 /// @brief	Release
 ///
-#define Sensor_BME280_RELEASE 103
+#define Sensor_BMP280_RELEASE 102
+
+#define BMP280_SLAVE_ADDRESS  0x77
 
 #define BM280_SUCCESS   0   ///< success
 #define BM280_ERROR     1   ///< error
 
+#define BMP280_FORCED_MODE 0b01
+#define BMP280_SLEEP_MODE 0b00
+#define BMP280_NORMAL_MODE 0b11
+
 #include "Wire.h"
 
 ///
-/// @brief    Default BME280 I2C address
+/// @brief      Class for sensor BMP280
+/// @details    Combined humidity and pressure sensor
+/// @see        http://www.bosch-sensortec.com/en/bst/products/all_products/bmp280
 ///
-#define BME280_SLAVE_ADDRESS  0x77
-
-#define BME280_FORCED_MODE 0b01
-#define BME280_SLEEP_MODE 0b00
-#define BME280_NORMAL_MODE 0b11
-
-
-///
-/// @brief      Class for sensor BME280
-/// @details    Combined temperature, humidity and pressure sensor
-/// @see        http://www.bosch-sensortec.com/de/homepage/products_3/environmental_sensors_1/bme280/bme280_1
-///
-class Sensor_BME280
+class Sensor_BMP280
 {
   public:
     ///
     /// @brief	Constructor
-    /// @param  address default = BME280_SLAVE_ADDRESS
+    /// @param	address I2C slave address
+    /// @note   Valid addresses are 0x76..0x78
     ///
-    Sensor_BME280(uint8_t address = BME280_SLAVE_ADDRESS);
+    Sensor_BMP280(uint8_t address = BMP280_SLAVE_ADDRESS);
+
 
     ///
     /// @brief	Initialisation
     /// @todo	mode hardware accuracy
     /// @param  number of reads
-    /// @note	See Table # of the BME280 data-sheet
+    /// @note	See Table # of the BMP280 data-sheet
     /// @todo   Add options
     ///
     void begin();
@@ -110,7 +108,7 @@ class Sensor_BME280
     ///    do
     ///    {
     ///        delay(100);
-    ///        result = myBME280.get();
+    ///        result = myBMP280.get();
     ///        count++;
     ///    }
     ///    while ((result > 0) and (count < 8));
@@ -124,12 +122,6 @@ class Sensor_BME280
     /// @note   Use conversion() for another unit
     ///
     float temperature();
-
-    ///
-    /// @brief	Return relative humidity
-    /// @return relative humidity, in %
-    ///
-    float humidity();
 
     ///
     /// @brief	Return pressure, relative to current altitude
@@ -171,8 +163,8 @@ class Sensor_BME280
     void setPowerMode(uint8_t mode = LOW);
 
   private:
+    uint8_t _address;
     float _temperature;
-    float _humidity;
     float _pressure;
 
     uint16_t _calibrationT1;
@@ -188,15 +180,6 @@ class Sensor_BME280
     int16_t  _calibrationP7;
     int16_t  _calibrationP8;
     int16_t  _calibrationP9;
-
-    uint8_t  _calibrationH1;
-    int16_t  _calibrationH2;
-    uint8_t  _calibrationH3;
-    int16_t  _calibrationH4;
-    int16_t  _calibrationH5;
-    int8_t   _calibrationH6;
-
-    uint8_t _slaveAddressBME280;
 };
 
 #endif

@@ -9,10 +9,10 @@
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 ///
-/// @date		20/08/2015 18:02
+/// @date		20 Aug 2015
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2016
+/// @copyright	(c) Rei Vilo, 2015-2018
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -99,5 +99,10 @@ uint8_t readRegister8(uint8_t device, uint8_t command);
 ///
 uint16_t readRegister16(uint8_t device, uint8_t command, uint8_t mode = MSBFIRST);
 
+///
+/// @brief    Delay without yield
+/// @param    ms period to wait for, ms
+///
+void delayBusy(uint32_t ms);
 
 #endif

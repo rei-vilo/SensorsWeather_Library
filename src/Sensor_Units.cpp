@@ -7,10 +7,10 @@
 //
 // Project 		SensorsBoosterPack
 //
-// Created by 	Rei Vilo, 20/08/2015 19:03
+// Created by 	Rei Vilo, 20 Aug 2015
 // 				http://embeddedcomputing.weebly.com
 //
-// Copyright	(c) Rei Vilo, 2015-2016
+// Copyright	(c) Rei Vilo, 2015-2018
 // Licence		CC = BY SA NC
 //
 // See 			Sensor_Units.h for references

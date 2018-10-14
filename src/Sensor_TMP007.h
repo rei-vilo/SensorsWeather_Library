@@ -9,10 +9,10 @@
 /// @author		a0273900 Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 ///
-/// @date		20/08/2015 13:42
+/// @date		20 Aug 2015
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2016
+/// @copyright	(c) Rei Vilo, 2015-2018
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -61,6 +61,7 @@
 ///
 /// @brief	TMP007 constants
 /// @{
+#define TMP007_SLAVE_ADDRESS            0x40
 #define TMP007_ONE_SAMPLE               0x0000
 #define TMP007_TWO_SAMPLES              0x0200
 #define TMP007_FOUR_SAMPLES             0x0400
@@ -83,8 +84,9 @@ class Sensor_TMP007
   public:
     ///
     /// @brief	Constructor
+    /// @param  address default = 0x40
     ///
-    Sensor_TMP007();
+    Sensor_TMP007(uint8_t address = TMP007_SLAVE_ADDRESS);
 
     ///
     /// @brief	Initialisation
@@ -107,13 +109,13 @@ class Sensor_TMP007
     /// @brief	Measure
     /// @return	Internal temperature in °K
     ///
-    float internalTemperature();
+    float internal();
 
     ///
     /// @brief	Measure
     /// @return	External temperature in °K
     ///
-    float externalTemperature();
+    float external();
 
     ///
     /// @brief	Manage power
@@ -125,6 +127,7 @@ class Sensor_TMP007
   private:
     float _internalTemperature;
     float _externalTemperature;
+    uint8_t _address;
 };
 
 

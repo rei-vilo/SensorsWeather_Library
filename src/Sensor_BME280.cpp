@@ -7,10 +7,10 @@
 //
 // Project 		SensorsBoosterPack
 //
-// Created by 	Rei Vilo, 20/08/2015 13:43
+// Created by 	Rei Vilo, 20 Aug 2015
 // 				http://embeddedcomputing.weebly.com
 //
-// Copyright	(c) Rei Vilo, 2015-2016
+// Copyright	(c) Rei VILO, 2015-2018
 // Licence		CC = BY SA NC
 //
 // See 			Sensor_BME280.h and ReadMe.txt for references
@@ -19,16 +19,16 @@
 
 
 // 0xF7 to 0xFE
-#define BME280_SLAVE_ADDRESS  0x77
+#define BME280_SLAVE_ADDRESS 0x77
 
-#define BME280_DATA_F7_FE   0xf7
-#define BME280_CONTROL_TEMPERATURE_PRESSURE      0xf4
-#define BME280_CONTROL_HUMIDITY     0xf2
+#define BME280_DATA_F7_FE 0xf7
+#define BME280_CONTROL_TEMPERATURE_PRESSURE 0xf4
+#define BME280_CONTROL_HUMIDITY 0xf2
 #define BME280_STATUS 0xf3
 #define BME280_CONFIGURATION 0xf5
 #define BME280_RESET 0xe0
 
-#define BME280_VALUE_RESET_EXECUTE                   0xb6
+#define BME280_VALUE_RESET_EXECUTE 0xb6
 
 #define BME280_CALIBRATION_T1 0x88
 #define BME280_CALIBRATION_T2 0x8a
@@ -42,13 +42,13 @@
 #define BME280_CALIBRATION_P7 0x9a
 #define BME280_CALIBRATION_P8 0x9c
 #define BME280_CALIBRATION_P9 0x9e
-#define BME280_calibrationH1  0xa1
+#define BME280_calibrationH1 0xa1
 
-#define BME280_calibrationH2  0xe1
-#define BME280_calibrationH3  0xe3
-#define BME280_calibrationH4  0xe4
-#define BME280_calibrationH5  0xe5
-#define BME280_calibrationH6  0xe7
+#define BME280_calibrationH2 0xe1
+#define BME280_calibrationH3 0xe3
+#define BME280_calibrationH4 0xe4
+#define BME280_calibrationH5 0xe5
+#define BME280_calibrationH6 0xe7
 
 // Library header
 #include "Sensor_BME280.h"
@@ -56,9 +56,9 @@
 
 // Code
 
-Sensor_BME280::Sensor_BME280()
+Sensor_BME280::Sensor_BME280(uint8_t address)
 {
-
+    _slaveAddressBME280 = address;
 }
 
 String Sensor_BME280::WhoAmI()
@@ -68,10 +68,17 @@ String Sensor_BME280::WhoAmI()
 
 void Sensor_BME280::begin()
 {
-    writeRegister8(BME280_SLAVE_ADDRESS, BME280_RESET, BME280_VALUE_RESET_EXECUTE);
+    writeRegister8(_slaveAddressBME280, BME280_RESET, BME280_VALUE_RESET_EXECUTE);
     delay(100);
-    writeRegister8(BME280_SLAVE_ADDRESS, BME280_CONTROL_TEMPERATURE_PRESSURE, 0x3f);
-    writeRegister8(BME280_SLAVE_ADDRESS, BME280_CONTROL_HUMIDITY, 0x03);
+    writeRegister8(_slaveAddressBME280, BME280_CONTROL_TEMPERATURE_PRESSURE, 0x25);
+    // 001.001.01 Default = 0x00
+    // 001.___.__ Pressure oversampling x1
+    // ___.001.__ Temperature oversampling x1
+    // ___.___.01 Mode = forced mode
+    
+    writeRegister8(_slaveAddressBME280, BME280_CONTROL_HUMIDITY, 0x01);
+    /// xxxxx.011 Default = 0x00
+    /// _____.001 Humidity oversampling x1
 
     //    Register Address	Register content	Data type
     //    ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼0x88 / 0x89		dig_T1 [7:0] / [15:8]	unsigned short = uint16_t
@@ -93,30 +100,30 @@ void Sensor_BME280::begin()
     //    ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼0xE5[7:4] / 0xE6	dig_H5 [3:0] / [11:4]	signed short = int16_t
     //    ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼0xE7				dig_H6                  signed char = int8_t
 
-    _calibrationT1 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_T1, LSBFIRST); // uint16_t
-    _calibrationT2 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_T2, LSBFIRST); // int16_t
-    _calibrationT3 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_T3, LSBFIRST); // int16_t
+    _calibrationT1 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_T1, LSBFIRST); // uint16_t
+    _calibrationT2 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_T2, LSBFIRST); // int16_t
+    _calibrationT3 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_T3, LSBFIRST); // int16_t
 
-    _calibrationP1 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P1, LSBFIRST); // uint16_t
-    _calibrationP2 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P2, LSBFIRST); // int16_t
-    _calibrationP3 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P3, LSBFIRST); // int16_t
-    _calibrationP4 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P4, LSBFIRST); // int16_t
-    _calibrationP5 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P5, LSBFIRST); // int16_t
-    _calibrationP6 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P6, LSBFIRST); // int16_t
-    _calibrationP7 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P7, LSBFIRST); // int16_t
-    _calibrationP8 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P8, LSBFIRST); // int16_t
-    _calibrationP9 = readRegister16(BME280_SLAVE_ADDRESS, BME280_CALIBRATION_P9, LSBFIRST); // int16_t
+    _calibrationP1 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P1, LSBFIRST); // uint16_t
+    _calibrationP2 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P2, LSBFIRST); // int16_t
+    _calibrationP3 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P3, LSBFIRST); // int16_t
+    _calibrationP4 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P4, LSBFIRST); // int16_t
+    _calibrationP5 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P5, LSBFIRST); // int16_t
+    _calibrationP6 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P6, LSBFIRST); // int16_t
+    _calibrationP7 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P7, LSBFIRST); // int16_t
+    _calibrationP8 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P8, LSBFIRST); // int16_t
+    _calibrationP9 = readRegister16(_slaveAddressBME280, BME280_CALIBRATION_P9, LSBFIRST); // int16_t
 
-    _calibrationH1 = readRegister8(BME280_SLAVE_ADDRESS, BME280_calibrationH1); // uint8_t
-    _calibrationH2 = readRegister16(BME280_SLAVE_ADDRESS, BME280_calibrationH2, LSBFIRST); // int16_t
-    _calibrationH3 = readRegister8(BME280_SLAVE_ADDRESS, BME280_calibrationH3); // uint8_t
+    _calibrationH1 = readRegister8(_slaveAddressBME280, BME280_calibrationH1); // uint8_t
+    _calibrationH2 = readRegister16(_slaveAddressBME280, BME280_calibrationH2, LSBFIRST); // int16_t
+    _calibrationH3 = readRegister8(_slaveAddressBME280, BME280_calibrationH3); // uint8_t
 
     //    0xE4 / 0xE5[3:0]	dig_H4 [11:4] / [3:0]	signed short = int16_t
-    _calibrationH4  = (readRegister8(BME280_SLAVE_ADDRESS, 0xe4) << 4) + (readRegister8(BME280_SLAVE_ADDRESS, 0xe5) & 0x0f);
+    _calibrationH4  = (readRegister8(_slaveAddressBME280, 0xe4) << 4) + (readRegister8(_slaveAddressBME280, 0xe5) & 0x0f);
     //    ￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼￼0xE5[7:4] / 0xE6	dig_H5 [3:0] / [11:4]	signed short = int16_t
-    _calibrationH5  = (readRegister8(BME280_SLAVE_ADDRESS, 0xe5) >> 4) + (readRegister8(BME280_SLAVE_ADDRESS, 0xe6) << 4);
+    _calibrationH5  = (readRegister8(_slaveAddressBME280, 0xe5) >> 4) + (readRegister8(_slaveAddressBME280, 0xe6) << 4);
 
-    _calibrationH6 = readRegister8(BME280_SLAVE_ADDRESS, BME280_calibrationH6); // int8_t
+    _calibrationH6 = readRegister8(_slaveAddressBME280, BME280_calibrationH6); // int8_t
 
     /*
         QuickDebugln("calibration T1 ui16: %i", _calibrationT1);
@@ -152,14 +159,14 @@ uint8_t Sensor_BME280::get()
     int32_t _rawPressure, _rawTemperature, _rawHumidity;
     int32_t t_fine;
 
-    //    while (readRegister8(BME280_SLAVE_ADDRESS, BME280_STATUS) & 0x08);
+    //    while (readRegister8(_slaveAddressBME280, BME280_STATUS) & 0x08);
 
-    Wire.beginTransmission(BME280_SLAVE_ADDRESS);
+    Wire.beginTransmission(_slaveAddressBME280);
     Wire.write(BME280_DATA_F7_FE);
     Wire.endTransmission();
 
     //    uint8_t data[8];
-    //    Wire.requestFrom(BME280_SLAVE_ADDRESS, 8);
+    //    Wire.requestFrom(_slaveAddressBME280, 8);
     //    while (Wire.available() < 8);
     //    for (uint8_t i=0; i<8; i++) {
     //        data[i] = Wire.read();
@@ -169,7 +176,7 @@ uint8_t Sensor_BME280::get()
     //    _rawTemperature = ((uint32_t)data[3] << 12) + ((uint32_t)data[4] << 4) + ((uint32_t)data[5]>> 4); // fa.fb.fc
     //    _rawHumidity = ((uint32_t)data[6] << 8) + ((uint32_t)data[7]); // fd.fe
 
-    Wire.requestFrom(BME280_SLAVE_ADDRESS, 8);
+    Wire.requestFrom(_slaveAddressBME280, 8);
     while (Wire.available() < 8);
     _rawPressure = ((uint32_t)Wire.read() << 12) + ((uint32_t)Wire.read() << 4) + ((uint32_t)Wire.read() >> 4); // f7.f8.f9
     _rawTemperature = ((uint32_t)Wire.read() << 12) + ((uint32_t)Wire.read() << 4) + ((uint32_t)Wire.read() >> 4); // fa.fb.fc
@@ -348,7 +355,12 @@ float Sensor_BME280::pressure()
 
 void Sensor_BME280::setPowerMode(uint8_t mode)
 {
-
+    uint8_t configuration = readRegister8(_slaveAddressBME280, BME280_CONTROL_TEMPERATURE_PRESSURE);
+    
+    configuration &= 0b11111100;
+    configuration |= mode;
+    
+    writeRegister8(_slaveAddressBME280, BME280_CONTROL_TEMPERATURE_PRESSURE, configuration);
 }
 
 float Sensor_BME280::absolutePressure(float altitudeMeters)
@@ -369,7 +381,7 @@ float Sensor_BME280::altitude(float referencePressure, float referenceAltitude)
     // Sea level pressure
     float seaLevelPressure = referencePressure / pow(1 - referenceAltitude  / 44330.77, 5.255876);
     // Altitude based on absolute pressure
-    return 44330.0 * (1.0 - pow(_pressure / seaLevelPressure, 0.1903));
+    return 44330.0 * (1.0 - pow(_pressure / seaLevelPressure, 0.190263));
 }
 
 

@@ -10,10 +10,10 @@
 /// @author		Rei Vilo for Energia adapted C++-library
 /// @author		http://embeddedcomputing.weebly.com
 ///
-/// @date		20/08/2015 13:42
+/// @date		20 Aug 2015
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2016
+/// @copyright	(c) Rei Vilo, 2015-2018
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -63,12 +63,17 @@
 ///
 /// @brief      Conversion modes
 /// @{
-//#define OPT3001_100_MS  0xc010 // shut-down
-#define OPT3001_100_MS  0xc410 ///< continous
-//#define OPT3001_800_MS  0xc810 // shut-down
-#define OPT3001_800_MS  0xcc10 ///< continuous
+#define OPT3001_100_MS_OFF  0xc010 // shut-down
+#define OPT3001_100_MS_ONCE 0xc210 // 100 ms once
+#define OPT3001_100_MS_CONTINUOUS  0xc410 ///< continous
+#define OPT3001_800_MS_ONCE  0xc810 // shut-down
+#define OPT3001_800_MS_OFF  0xca10 // 800 ms once
+#define OPT3001_800_MS_CONTINUOUS  0xcc10 ///< continuous
 #define OPT3001_INTERRUPT_PIN 11
+
 /// @}
+
+#define OPT3001_SLAVE_ADDRESS           0x47
 
 ///
 /// @brief      Class for sensor OPT3001
@@ -81,14 +86,14 @@ class Sensor_OPT3001
     ///
     /// @brief	Constructor
     ///
-    Sensor_OPT3001();
+    Sensor_OPT3001(uint8_t address = OPT3001_SLAVE_ADDRESS);
 
     ///
     /// @brief	Initialisation
     /// @param	configuration default = 100 ms, OPT3001_100_MS or OPT3001_800_MS
     /// @param	interruptPin default = 11
     ///
-    void begin(uint16_t configuration = OPT3001_100_MS,
+    void begin(uint16_t configuration = OPT3001_100_MS_CONTINUOUS,
                uint8_t interruptPin = OPT3001_INTERRUPT_PIN);
 
     ///
@@ -106,8 +111,8 @@ class Sensor_OPT3001
     /// @brief	Measure
     /// @return	light in lux
     ///
-    // uint32_t light();
     float light();
+    // uint32_t light();
 
     ///
     /// @brief	Manage power
@@ -130,7 +135,9 @@ class Sensor_OPT3001
     //	uint16_t lowlimit_reg;/**< low limit register value*/
     //	uint16_t highlimit_reg;/**< high limit register value*/
     uint8_t _interruptPin;
+    uint16_t _configuration;
     uint32_t _rawLux; ///< raw lux result register value
+    uint8_t _address;
 };
 
 

@@ -1,18 +1,18 @@
 ///
 /// @mainpage	WeatherSensors
 ///
-/// @details	Description of the project
+/// @details	Library for the Weather Sensors of the Sensors BoosterPack and the CC1350 SensorTag
 /// @n
 /// @n
 /// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
 ///
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
-/// @date		nov. 12, 2016 19:37
-/// @version	<#version#>
+/// @date		12 Nov 2016
+/// @version	103
 ///
-/// @copyright	(c) Rei Vilo, 2016
-/// @copyright	GNU General Public Licence
+/// @copyright	(c) Rei Vilo, 2016-2018
+/// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
 ///
@@ -22,16 +22,16 @@
 /// @file		WeatherSensors.ino
 /// @brief		Main sketch
 ///
-/// @details	<#details#>
+/// @details	Example for climate sensors
 /// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
 ///
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
-/// @date		nov. 12, 2016 19:37
-/// @version	<#version#>
+/// @date		12 Nov 2016
+/// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2016
-/// @copyright	GNU General Public Licence
+/// @copyright	(c) Rei Vilo, 2016-2018
+/// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
 /// @n
@@ -46,7 +46,7 @@
 #endif // end IDE
 
 // Set parameters
-#define USE_TMP007  0
+#define USE_TMP007  1
 #define USE_OPT3001 1
 #define USE_BME280  1
 
@@ -59,7 +59,7 @@
 #if (USE_TMP007 == 1)
 #include "Sensor_TMP007.h"
 Sensor_TMP007 myTMP007;
-float TMP007_internalTemperature, TMP007_externalTemperature;
+float TMP007_internal, TMP007_external;
 #endif
 
 #if (USE_OPT3001 == 1)
@@ -82,6 +82,9 @@ const uint32_t period_ms = 10000;
 void setup()
 {
     Serial.begin(9600);
+
+    Serial.println("Wire.begin");
+//    Wire.setModule(1);
     Wire.begin();
 
 #if (USE_TMP007 == 1)
@@ -95,7 +98,9 @@ void setup()
 #endif
 
 #if (USE_BME280 == 1)
+    Serial.println("myBME280.begin");
     myBME280.begin();
+    Serial.println("myBME280.get");
     myBME280.get();
 #endif
 }
@@ -105,15 +110,15 @@ void loop()
 {
 #if (USE_TMP007 == 1)
     myTMP007.get();
-    TMP007_internalTemperature = conversion(myTMP007.internalTemperature(), KELVIN, CELSIUS);
-    TMP007_externalTemperature = conversion(myTMP007.externalTemperature(), KELVIN, CELSIUS));
-    Serial.print("TMP007_internalTemperature ");
-    Serial.print(TMP007_internalTemperature);
-    Serial.println(CELSIUS.symbol)
+    TMP007_internal = conversion(myTMP007.internal(), KELVIN, CELSIUS);
+    TMP007_external = conversion(myTMP007.external(), KELVIN, CELSIUS);
+    Serial.print("TMP007_internal ");
+    Serial.print(TMP007_internal);
+    Serial.println(CELSIUS.symbol);
 
-    Serial.print("TMP007_externalTemperature ");
-    Serial.print(TMP007_externalTemperature);
-    Serial.println(CELSIUS.symbol)
+    Serial.print("TMP007_external ");
+    Serial.print(TMP007_external);
+    Serial.println(CELSIUS.symbol);
 #endif
 
 #if (USE_OPT3001 == 1)
@@ -125,6 +130,7 @@ void loop()
 #endif
 
 #if (USE_BME280 == 1)
+    Serial.println("myBME280.get");
     myBME280.get();
     BME280_pressure = myBME280.pressure();
     BME280_temperature = conversion(myBME280.temperature(), KELVIN, CELSIUS);
