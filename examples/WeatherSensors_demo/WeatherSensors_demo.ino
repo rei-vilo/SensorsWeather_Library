@@ -1,7 +1,7 @@
 ///
 /// @mainpage	WeatherSensors
 ///
-/// @details	Library for the Weather Sensors of the Sensors BoosterPack and the CC1350 SensorTag
+/// @details	Library for different LaunchPad and BoosgerPack weather sensors
 /// @n
 /// @n
 /// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
@@ -9,15 +9,29 @@
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 /// @date		12 Nov 2016
-/// @version	103
+/// @version	105
 ///
-/// @copyright	(c) Rei Vilo, 2016-2018
+/// @copyright	(c) Rei Vilo, 2016-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
 ///
-
-
+/// @note       List of sensors and I²C addresses
+/// Board | Infra-Red | Temperature | Humidity | Pressure | Light
+/// ---- | ---- | ---- | ---- | ---- | ----
+/// **Sensors BoosterPack** | TMP007 0x40 |  | | | OPT3001 0x47
+/// | | | BME280 0x77 | BME280 0x77 | BME280 0x77 | |
+/// **BASS BoosterPack** | TMP116 0x48 |  | |  | OPT3001 0x44 |
+///  | | | HDC1000 0x40 | HDC1000 0x40 | | |
+/// **CC1350 SensorTag** | TMP007 0x44 |  | |  | OPT3001 0x45 |
+///  | | | HDC1000 0x43 | HDC1000 0x43 | | |
+/// | | | BMP280 0x77 | | BMP280 0x77 | |
+/// **CC1352 LPSTK** | | HDC2080 0x41 | HDC2080 0x41 | | OPT3001 0x44 |
+///
+/// + **BASS** = Building Automation System Sensors
+/// + **LPSTK** = LaunchPad SensorTag Kit
+///
+///
 ///
 /// @file		WeatherSensors.ino
 /// @brief		Main sketch
@@ -28,9 +42,9 @@
 /// @author		Rei Vilo
 /// @author		http://embeddedcomputing.weebly.com
 /// @date		12 Nov 2016
-/// @version	102
+/// @version	105
 ///
-/// @copyright	(c) Rei Vilo, 2016-2018
+/// @copyright	(c) Rei Vilo, 2016-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references

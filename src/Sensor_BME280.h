@@ -4,15 +4,15 @@
 /// @details	BME280 Combined humidity and pressure sensor
 /// @n
 /// @n @b		Project SensorsBoosterPack
-/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// @n @a		Developed with [embedXcode+](https://embedXcode.weebly.com)
 ///
 /// @author		Rei Vilo
-/// @author		http://embeddedcomputing.weebly.com
+/// @author		https://embeddedcomputing.weebly.com
 ///
 /// @date		20 Aug 2017
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2018
+/// @copyright	(c) Rei Vilo, 2015-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -69,10 +69,13 @@
 ///
 #define BME280_SLAVE_ADDRESS  0x77
 
-#define BME280_FORCED_MODE 0b01
-#define BME280_SLEEP_MODE 0b00
-#define BME280_NORMAL_MODE 0b11
-
+///
+/// @brief    BME280 modes
+/// @{
+#define BME280_FORCED_MODE 0b01 ///< Forced mode
+#define BME280_SLEEP_MODE 0b00 ///< Sleep mode
+#define BME280_NORMAL_MODE 0b11 ///< Normal mode
+/// @}
 
 ///
 /// @brief      Class for sensor BME280

@@ -4,7 +4,7 @@
 /// @details	HDC1000 Temperature and Humidity Sensor
 /// @n
 /// @n @b		Project smartWatch
-/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// @n @a		Developed with [embedXcode+](https://embedXcode.weebly.com)
 ///
 /// @author		ReiVilo
 /// @author		ReiVilo
@@ -12,7 +12,7 @@
 /// @date		12 Mar 2016
 /// @version	101
 ///
-/// @copyright	(c) Rei Vilo, 2016-2018
+/// @copyright	(c) Rei Vilo, 2016-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -114,7 +114,7 @@ class Sensor_HDC1000
     /// @return	Relative humidity in %
     ///
     double humidity();
-    
+
     ///
     /// @brief    Manage power
     /// @param    mode LOW=default=off, HIGH=on

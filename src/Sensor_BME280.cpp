@@ -3,14 +3,14 @@
 // Library C++ code
 // ----------------------------------
 // Developed with embedXcode+
-// http://embedXcode.weebly.com
+// https://embedXcode.weebly.com
 //
 // Project 		SensorsBoosterPack
 //
 // Created by 	Rei Vilo, 20 Aug 2015
-// 				http://embeddedcomputing.weebly.com
+// 				https://embeddedcomputing.weebly.com
 //
-// Copyright	(c) Rei VILO, 2015-2018
+// Copyright	(c) Rei Vilo, 2015-2020
 // Licence		CC = BY SA NC
 //
 // See 			Sensor_BME280.h and ReadMe.txt for references
@@ -75,7 +75,7 @@ void Sensor_BME280::begin()
     // 001.___.__ Pressure oversampling x1
     // ___.001.__ Temperature oversampling x1
     // ___.___.01 Mode = forced mode
-    
+
     writeRegister8(_slaveAddressBME280, BME280_CONTROL_HUMIDITY, 0x01);
     /// xxxxx.011 Default = 0x00
     /// _____.001 Humidity oversampling x1
@@ -156,9 +156,14 @@ void Sensor_BME280::begin()
 
 uint8_t Sensor_BME280::get()
 {
-    int32_t _rawPressure, _rawTemperature, _rawHumidity;
-    int32_t t_fine;
+    // Power-up
+    setPowerMode(HIGH);
 
+    int32_t _rawPressure, _rawTemperature, _rawHumidity;
+    int64_t t_fine;
+    _rawPressure = 0;
+    _rawTemperature = 0;
+    _rawHumidity = 0;
     //    while (readRegister8(_slaveAddressBME280, BME280_STATUS) & 0x08);
 
     Wire.beginTransmission(_slaveAddressBME280);
@@ -356,10 +361,10 @@ float Sensor_BME280::pressure()
 void Sensor_BME280::setPowerMode(uint8_t mode)
 {
     uint8_t configuration = readRegister8(_slaveAddressBME280, BME280_CONTROL_TEMPERATURE_PRESSURE);
-    
+
     configuration &= 0b11111100;
     configuration |= mode;
-    
+
     writeRegister8(_slaveAddressBME280, BME280_CONTROL_TEMPERATURE_PRESSURE, configuration);
 }
 

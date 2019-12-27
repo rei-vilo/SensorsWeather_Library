@@ -3,14 +3,14 @@
 // Library C++ code
 // ----------------------------------
 // Developed with embedXcode+
-// http://embedXcode.weebly.com
+// https://embedXcode.weebly.com
 //
 // Project 		SensorsBoosterPack
 //
 // Created by 	Rei Vilo, 20 Aug 2015
-// 				http://embeddedcomputing.weebly.com
+// 				https://embeddedcomputing.weebly.com
 //
-// Copyright 	(c) Rei Vilo, 2015-2018
+// Copyright 	(c) Rei Vilo, 2015-2020
 // Licence		CC = BY SA NC
 //
 // See 			Sensor_BMP280.h and ReadMe.txt for references
@@ -196,10 +196,10 @@ void Sensor_BMP280::setPowerMode(uint8_t mode)
 //        writeRegister8(_address, BMP280_CONTROL, value);
 //    }
     uint8_t configuration = readRegister8(_address, BMP280_CONTROL);
-    
+
     configuration &= 0b11111100;
     configuration |= mode;
-    
+
     writeRegister8(_address, BMP280_CONTROL, configuration);
 }
 

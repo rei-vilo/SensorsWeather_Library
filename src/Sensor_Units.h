@@ -4,15 +4,15 @@
 /// @details	Units conversion for sensors
 /// @n
 /// @n @b		Project SensorsBoosterPack
-/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// @n @a		Developed with [embedXcode+](https://embedXcode.weebly.com)
 ///
 /// @author		Rei Vilo
-/// @author		http://embeddedcomputing.weebly.com
+/// @author		https://embeddedcomputing.weebly.com
 ///
 /// @date		20 Aug 2017
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2018
+/// @copyright	(c) Rei Vilo, 2015-2020
 /// @copyright	CC = SA BY NC
 ///
 /// @see		ReadMe.txt for references
@@ -76,46 +76,50 @@ struct unit_conversion_s
 /// @}
 
 ///
-/// @brief	Temperature units
+/// @brief	    Temperature units
+/// @details    SI reference = °K degree kelvin
 /// @{
 typedef unit_conversion_s temperature_unit_t;
-const temperature_unit_t KELVIN      = { 1, 0, "°K"};          ///< °K degree kelvin, SI reference
+const temperature_unit_t KELVIN      = { 1, 0, "°K"};          ///< °K degree kelvin
 const temperature_unit_t CELSIUS     = { 1, -273.15, "°C"};    ///< °C degree celsius
 const temperature_unit_t FAHRENHEIT  = { 1.8, -459.67, "°F"};  ///< °F degree fahrenheit
 /// @}
 
 ///
-/// @brief	Pressure units
+/// @brief	    Pressure units
+/// @details    SI reference = hPa hecto pascal
 /// @{
 typedef unit_conversion_s pressure_unit_t;
 const pressure_unit_t    PASCAL      = { 1, 0, "Pa"};           ///< Pa pascal, SI reference
-const pressure_unit_t    HECTOPASCAL = { 1e-2, 0, "hPa"};       ///< hPa hecto pascal, SI reference
+const pressure_unit_t    HECTOPASCAL = { 1e-2, 0, "hPa"};       ///< hPa hecto pascal
 const pressure_unit_t    BAR         = { 1e-5, 0, "bar"};       ///< bar
 const pressure_unit_t    ATMOSPHERE  = { 1.0 / 101325.0, 0, "atm"}; ///< atmosphere
 const pressure_unit_t    PSI         = { 0.014503773801, 0, "atm"};  ///< 0.014503773801 pound force/square inch
 /// @}
 
 ///
-/// @brief	Altitude units
+/// @brief	    Altitude units
+/// @details    SI reference = m metre
 /// @{
 typedef unit_conversion_s altitude_unit_t;
-const altitude_unit_t    METRE       = { 1, 0, "m"};           ///< m metre, SI reference
+const altitude_unit_t    METRE       = { 1, 0, "m"};           ///< m metre
 const altitude_unit_t    FOOT        = { 0.3048, 0, "ft"};     ///< ft foot
 /// @}
 
 ///
-/// @brief	Light units
+/// @brief	    Light units
+/// @details    SI reference = lx lux
 /// @{
 typedef unit_conversion_s light_unit_t;
-const light_unit_t       LUX         = { 1, 0, "lx"};           ///< lx, SI reference
+const light_unit_t       LUX         = { 1, 0, "lx"};           ///< lx lux
 /// @}
 
 ///
-/// @brief	Conversion utility
-/// @param	value input value to be converted, float
-/// @param	unitFrom unit of the input value to be converted
-/// @param	unitTo unit for the output converted value
-/// @return	output converted value, float
+/// @brief	    Conversion utility
+/// @param	    value input value to be converted, float
+/// @param	    unitFrom unit of the input value to be converted
+/// @param	    unitTo unit for the output converted value
+/// @return	    output converted value, float
 ///
 template <typename myType>
 float conversion(float value, myType unitFrom, myType unitTo)
@@ -124,9 +128,9 @@ float conversion(float value, myType unitFrom, myType unitTo)
 }
 
 ///
-/// @brief	Unit symbol as String
-/// @param	unit unit constant
-/// @return	symbol as String
+/// @brief	    Unit symbol as String
+/// @param	    unit unit constant
+/// @return	    symbol as String
 ///
 template <typename myType>
 String symbolString(myType unit)
@@ -135,9 +139,9 @@ String symbolString(myType unit)
 }
 
 ///
-/// @brief	Unit symbol as char*
-/// @param	unit unit constant
-/// @return	symbol as char*
+/// @brief	    Unit symbol as char*
+/// @param	    unit unit constant
+/// @return	    symbol as char*
 ///
 template <typename myType>
 char * symbolChar(myType unit)

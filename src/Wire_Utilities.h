@@ -4,15 +4,15 @@
 /// @details	Utilities for 8- and 16-bit read and write operations
 /// @n
 /// @n @b		Project SensorsBoosterPack
-/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// @n @a		Developed with [embedXcode+](https://embedXcode.weebly.com)
 ///
 /// @author		Rei Vilo
-/// @author		http://embeddedcomputing.weebly.com
+/// @author		https://embeddedcomputing.weebly.com
 ///
 /// @date		20 Aug 2015
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2018
+/// @copyright	(c) Rei Vilo, 2015-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references

@@ -3,14 +3,14 @@
 // Library C++ code
 // ----------------------------------
 // Developed with embedXcode+
-// http://embedXcode.weebly.com
+// https://embedXcode.weebly.com
 //
 // Project 		smartWatch
 //
 // Created by 	ReiVilo, 12 Mar 2016
 // 				ReiVilo
 //
-// Copyright 	(c) Rei Vilo, 2016-2018
+// Copyright 	(c) Rei Vilo, 2016-2020
 // Licence		CC = BY SA NC
 //
 // See 			Sensor_HDC1000.h and ReadMe.txt for references
@@ -41,11 +41,11 @@ void Sensor_HDC1000::begin(uint8_t configuration)
     configuration |= HDC1000_MODE_SEQUENCE;
 
 //    writeRegister88(_address, HDC1000_CONFIGURATION, configuration, 0x00);
-        Wire.beginTransmission(_address);
-        Wire.write(HDC1000_CONFIGURATION);
-        Wire.write(configuration);
-        Wire.write(0x00);
-        Wire.endTransmission();
+    Wire.beginTransmission(_address);
+    Wire.write(HDC1000_CONFIGURATION);
+    Wire.write(configuration);
+    Wire.write(0x00);
+    Wire.endTransmission();
 }
 
 void Sensor_HDC1000::get()
@@ -59,7 +59,7 @@ void Sensor_HDC1000::get()
     Wire.beginTransmission(_address);
     Wire.write(HDC1000_TEMPERATURE);
     Wire.endTransmission();
-    
+
     // delay(20);
     uint32_t chrono = millis() + 20;
     while (millis() < chrono);

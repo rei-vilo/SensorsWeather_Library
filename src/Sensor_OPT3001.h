@@ -4,16 +4,16 @@
 /// @details	OPT3001 Digital Ambient Light Sensor (ALS) with High Precision Human Eye Response
 /// @n
 /// @n @b		Project SensorsBoosterPack
-/// @n @a		Developed with [embedXcode+](http://embedXcode.weebly.com)
+/// @n @a		Developed with [embedXcode+](https://embedXcode.weebly.com)
 ///
 /// @author		a0273900 for initial C-library
 /// @author		Rei Vilo for Energia adapted C++-library
-/// @author		http://embeddedcomputing.weebly.com
+/// @author		https://embeddedcomputing.weebly.com
 ///
 /// @date		20 Aug 2015
 /// @version	102
 ///
-/// @copyright	(c) Rei Vilo, 2015-2018
+/// @copyright	(c) Rei Vilo, 2015-2020
 /// @copyright	CC = BY SA NC
 ///
 /// @see		ReadMe.txt for references
@@ -69,10 +69,16 @@
 #define OPT3001_800_MS_ONCE  0xc810 // shut-down
 #define OPT3001_800_MS_OFF  0xca10 // 800 ms once
 #define OPT3001_800_MS_CONTINUOUS  0xcc10 ///< continuous
-#define OPT3001_INTERRUPT_PIN 11
-
 /// @}
 
+///
+/// @brief      Interrupt pin number
+///
+#define OPT3001_INTERRUPT_PIN 11
+
+///
+/// @brief      Default I2C address
+///
 #define OPT3001_SLAVE_ADDRESS           0x47
 
 ///
