@@ -135,7 +135,7 @@ uint8_t Sensor_BMP280::get()
 
     if (_rawPressure == 0x80000)
     {
-        return BM280_ERROR;
+        return BMP280_ERROR;
     }
 
     // Code from Adafruit from BMP280 (BST-BMP280-DS001-11).pdf
@@ -168,7 +168,7 @@ uint8_t Sensor_BMP280::get()
         _pressure = (float)var3 / 25600.0; // in hPa
     }
 
-    return BM280_SUCCESS;
+    return BMP280_SUCCESS;
 }
 
 float Sensor_BMP280::temperature()

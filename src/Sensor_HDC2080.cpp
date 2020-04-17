@@ -66,12 +66,17 @@ void Sensor_HDC2080::get()
 
 double Sensor_HDC2080::temperature(void)
 {
-    return float(_temperature) * 165.0 / 65536.0 - 40.0;
+    return float(_temperature) * 165.0 / 65536.0 - 40.0 + 273.15;
 }
 
 double Sensor_HDC2080::humidity()
 {
     return float(_humidity) / 65536.0 * 100.0;
+}
+
+void Sensor_HDC2080::setPowerMode(uint8_t mode)
+{
+    ;
 }
 
 void Sensor_HDC2080::enableHeater(void)

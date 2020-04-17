@@ -118,6 +118,7 @@ class Sensor_HDC1000
     ///
     /// @brief    Manage power
     /// @param    mode LOW=default=off, HIGH=on
+    /// @note     Empty function, for compatibility only
     ///
     void setPowerMode(uint8_t mode = LOW);
 

@@ -59,8 +59,8 @@
 ///
 #define Sensor_BME280_RELEASE 103
 
-#define BM280_SUCCESS   0   ///< success
-#define BM280_ERROR     1   ///< error
+#define BME280_SUCCESS   0   ///< success
+#define BME280_ERROR     1   ///< error
 
 #include "Wire.h"
 

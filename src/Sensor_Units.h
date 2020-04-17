@@ -62,7 +62,7 @@
 ///
 /// @brief      Units
 /// @details	A unit contains gain and base for conversion based on the SI reference unit.
-/// @note       For each set of units, all units are defined the SI reference unit
+/// @note       For each set of units, all units are defined relative to the SI reference unit
 /// @todo       A better solution would be typed enum.
 /// @n			unit = (SI reference unit) * gain + base
 ///
@@ -90,11 +90,11 @@ const temperature_unit_t FAHRENHEIT  = { 1.8, -459.67, "°F"};  ///< °F degree 
 /// @details    SI reference = hPa hecto pascal
 /// @{
 typedef unit_conversion_s pressure_unit_t;
-const pressure_unit_t    PASCAL      = { 1, 0, "Pa"};           ///< Pa pascal, SI reference
-const pressure_unit_t    HECTOPASCAL = { 1e-2, 0, "hPa"};       ///< hPa hecto pascal
-const pressure_unit_t    BAR         = { 1e-5, 0, "bar"};       ///< bar
-const pressure_unit_t    ATMOSPHERE  = { 1.0 / 101325.0, 0, "atm"}; ///< atmosphere
-const pressure_unit_t    PSI         = { 0.014503773801, 0, "atm"};  ///< 0.014503773801 pound force/square inch
+const pressure_unit_t PASCAL      = { 1, 0, "Pa"};           ///< Pa pascal, SI reference
+const pressure_unit_t HECTOPASCAL = { 1e-2, 0, "hPa"};       ///< hPa hecto pascal
+const pressure_unit_t BAR         = { 1e-5, 0, "bar"};       ///< bar
+const pressure_unit_t ATMOSPHERE  = { 1.0 / 101325.0, 0, "atm"}; ///< atmosphere
+const pressure_unit_t PSI         = { 0.014503773801, 0, "psi"};  ///< 0.014503773801 pound force/square inch
 /// @}
 
 ///
@@ -102,8 +102,8 @@ const pressure_unit_t    PSI         = { 0.014503773801, 0, "atm"};  ///< 0.0145
 /// @details    SI reference = m metre
 /// @{
 typedef unit_conversion_s altitude_unit_t;
-const altitude_unit_t    METRE       = { 1, 0, "m"};           ///< m metre
-const altitude_unit_t    FOOT        = { 0.3048, 0, "ft"};     ///< ft foot
+const altitude_unit_t METRE       = { 1, 0, "m"};           ///< m metre
+const altitude_unit_t FOOT        = { 0.3048, 0, "ft"};     ///< ft foot
 /// @}
 
 ///
@@ -111,7 +111,7 @@ const altitude_unit_t    FOOT        = { 0.3048, 0, "ft"};     ///< ft foot
 /// @details    SI reference = lx lux
 /// @{
 typedef unit_conversion_s light_unit_t;
-const light_unit_t       LUX         = { 1, 0, "lx"};           ///< lx lux
+const light_unit_t LUX         = { 1, 0, "lx"};           ///< lx lux
 /// @}
 
 ///

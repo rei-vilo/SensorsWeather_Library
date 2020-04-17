@@ -12,10 +12,18 @@ The **Weather Sensors Library** supports the
 
 of the 
 
-+ [Sensors BoosterPack](https://embeddedcomputing.weebly.com/sensors-boosterpack.html), 
-+ [Building Automation System Sensors](https://embeddedcomputing.weebly.com/building-automation-system-sensors-boosterpack.html),
++ [Launchpad SensorTag kit CC1352R](https://embeddedcomputing.weebly.com/launchpad-sensortag-kit-cc1352.html),
 + [SensorTag CC1350](https://embeddedcomputing.weebly.com/sensortag-cc1350.html),
-+ [Launchpad SensorTag kit CC1352R](https://embeddedcomputing.weebly.com/launchpad-sensortag-kit-cc1352.html).
++ [Building Automation System Sensors](https://embeddedcomputing.weebly.com/building-automation-system-sensors-boosterpack.html),
++ [Sensors BoosterPack](https://embeddedcomputing.weebly.com/sensors-boosterpack.html).
+
+Sensors | LPSTK-CC1352R1 | SensorTag CC1350 | BASS BoosterPack | Sensors BoosterPack
+---- | ---- | ---- | ---- | ---- | ---- 
+Temperature | HDC2080 | BMP280 + HDC1000 | HDC2010 | BME280
+Humidity | HDC2080 | HDC1000 | HDC2010 | BME280
+Pressure |  | BMP280 |  | BME280
+Light | OPT3001 | OPT3001 | OPT3001 | OPT3001
+Temperature IR |  | TMP007 | TMP116 | TMP007
 
 The IMU sensors (Bosch BMI160 and BMM150) of the Sensors BoosterPack are insufficiently documented and thus not supported.
 

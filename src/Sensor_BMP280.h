@@ -64,15 +64,15 @@
 ///
 #define BMP280_SLAVE_ADDRESS  0x77
 
-#define BM280_SUCCESS   0   ///< success
-#define BM280_ERROR     1   ///< error
+#define BMP280_SUCCESS   0   ///< success
+#define BMP280_ERROR     1   ///< error
 
 ///
 /// @brief    BME280 modes
 /// @{
-#define BME280_FORCED_MODE 0b01 ///< Forced mode
-#define BME280_SLEEP_MODE 0b00 ///< Sleep mode
-#define BME280_NORMAL_MODE 0b11 ///< Normal mode
+#define BMP280_FORCED_MODE 0b01 ///< Forced mode
+#define BMP280_SLEEP_MODE 0b00 ///< Sleep mode
+#define BMP280_NORMAL_MODE 0b11 ///< Normal mode
 /// @}
 
 #include "Wire.h"

@@ -50,7 +50,7 @@
 #elif defined(ARDUINO) // Arduino 1.0 and 1.5 specific
 #include "Arduino.h"
 #else // error
-#   error Platform not defined
+#error Platform not defined
 #endif // end IDE
 
 
@@ -66,7 +66,6 @@
 ///
 void writeRegister8(uint8_t device, uint8_t command, uint8_t data8);
 
-
 ///
 /// @brief	Write 2 bytes
 /// @param	device I2C address, 7-bit coded
@@ -78,7 +77,6 @@ void writeRegister8(uint8_t device, uint8_t command, uint8_t data8);
 ///
 void writeRegister16(uint8_t device, uint8_t command, uint16_t data16, uint8_t mode = MSBFIRST);
 
-
 ///
 /// @brief	Read 1 byte
 /// @param	device I2C address, 7-bit coded
@@ -86,7 +84,6 @@ void writeRegister16(uint8_t device, uint8_t command, uint16_t data16, uint8_t m
 /// @return	data8 value, 8-bit
 ///
 uint8_t readRegister8(uint8_t device, uint8_t command);
-
 
 ///
 /// @brief	Read 2 bytes

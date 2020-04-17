@@ -34,7 +34,7 @@
 #define HDC2080_I2C_ADDRESS 0x41
 
 ///
-/// @brief      Default settings
+/// @brief      Default reset settings
 /// @details    Values 0b01010000
 /// * LSB b7    Sotfware reset, 0 = normal
 /// *     b6:4  Auto Measurement Mode, 101 = 1 Hz
@@ -43,6 +43,10 @@
 /// *     b2    Interrupt polarity, 0 = active low
 /// * MSB b0    Interrupt mode, 0 = Level sensitive
 ///
+#define HDC2080_RESET_SETTINGS 0b00000000
+
+///
+/// @brief      Default custom settings
 /// @details    Values 0b00000000
 /// * LSB b7    Sotfware reset, 0 = normal
 /// *     b6:4  Auto Measurement Mode, 000 = manual
@@ -136,8 +140,16 @@ class Sensor_HDC2080
     /// @return   Relative humidity in %
     ///
     double humidity();
+    
+    ///
+    /// @brief    Manage power
+    /// @param    mode LOW=default=off, HIGH=on
+    /// @note     Empty function, for compatibility only
+    ///
+    void setPowerMode(uint8_t mode = LOW);
 
-
+    // Other functions from initial library
+    //
     void enableHeater(void);				// Enables the heating element
     void disableHeater(void);				// Disables the heating element
     void setLowTemp(float temp);			// Sets low threshold temperature (in c)

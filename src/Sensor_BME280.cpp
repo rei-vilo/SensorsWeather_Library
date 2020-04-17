@@ -189,7 +189,7 @@ uint8_t Sensor_BME280::get()
 
     if (_rawPressure == 0x80000)
     {
-        return BM280_ERROR;
+        return BME280_ERROR;
         //        Serial.print("!!! Error");
     }
 
@@ -339,7 +339,7 @@ uint8_t Sensor_BME280::get()
     }
     _humidity = (float)(var1 >> 12) / 1024.0; // in %
 
-    return BM280_SUCCESS;
+    return BME280_SUCCESS;
 }
 
 float Sensor_BME280::temperature()
