@@ -18,7 +18,7 @@ of the
 + [Sensors BoosterPack](https://embeddedcomputing.weebly.com/sensors-boosterpack.html).
 
 Sensors | LPSTK-CC1352R1 | SensorTag CC1350 | BASS BoosterPack | Sensors BoosterPack
----- | ---- | ---- | ---- | ---- | ---- 
+---- | ---- | ---- | ---- | ----
 Temperature | HDC2080 | BMP280 + HDC1000 | HDC2010 | BME280
 Humidity | HDC2080 | HDC1000 | HDC2010 | BME280
 Pressure |  | BMP280 |  | BME280
